@@ -2,43 +2,29 @@ class Socket {
     constructor(host, port, service) {
         this.socket = new WebSocket(`ws://${host}:${port}/${service}`);
 
+        this.responseConsumer = null;
+
         this.socket.onmessage = (e) => {
-            this.buffer = e.data;
-            this.RunConsumers();
+            this.responseConsumer(e.data);
         }
-
-        this.buffer = "";
-        this.consumers = [];
     }
 
-    RunConsumers() {
-        for(let i = 0; i < this.consumers.length; i++)
-            this.consumers[i](this.buffer);
-    } 
-
-    AddConsumer(func) {
-        this.consumers.push(func);
-    }
-
-    RequestElevationData() {
-        this.socket.send("elevationData");
+    RequestElevationData(responseConsumer) {
+        this.Send("elevationData", responseConsumer);
     }
     
-    RequestWidth() {
-        this.socket.send("width");
+    RequestWidth(responseConsumer) {
+        this.Send("width", responseConsumer);
     }
     
-    RequestHeight() {
-        this.socket.send("height");
+    RequestHeight(responseConsumer) {
+        this.Send("height", responseConsumer);
+    }
+
+    Send(message, responseConsumer) {
+        this.socket.send(message);
+        this.responseConsumer = responseConsumer;
     }
 }
 
 const socket = new Socket("localhost", 5963, "default");
-
-socket.AddConsumer(LogToConsole);
-
-function LogToConsole(data) {
-    console.log(data);
-}
-
-
