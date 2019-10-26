@@ -6,12 +6,15 @@ public class WebSocket : MonoBehaviour
     [SerializeField]
     int wsServerPort = 5963;
 
-    WebSocketService webSocketService = new WebSocketService();
+    [SerializeField]
+    string servicePath = "/default";
+
     WebSocketServer wsServer;
+
     void Start()
     {
         wsServer = new WebSocketServer(wsServerPort);
-        wsServer.AddWebSocketService<WebSocketService>("/terrain");
+        wsServer.AddWebSocketService<WebSocketService>(servicePath);
         wsServer.Start();
 
 #if UNITY_EDITOR
