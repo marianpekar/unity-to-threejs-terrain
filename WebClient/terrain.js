@@ -1,25 +1,44 @@
-let socket;
+class Socket {
+    constructor(host, port, service) {
+        this.socket = new WebSocket(`ws://${host}:${port}/${service}`);
 
-function Init() {
-    socket = new WebSocket("ws://localhost:5963/terrain");
+        this.socket.onmessage = (e) => {
+            this.buffer = e.data;
+            this.RunConsumers();
+        }
 
-    socket.onmessage = (e) => {
-        console.log(e.data);
+        this.buffer = "";
+        this.consumers = [];
+    }
+
+    RunConsumers() {
+        for(let i = 0; i < this.consumers.length; i++)
+            this.consumers[i](this.buffer);
+    } 
+
+    AddConsumer(func) {
+        this.consumers.push(func);
+    }
+
+    RequestElevationData() {
+        this.socket.send("elevationData");
+    }
+    
+    RequestWidth() {
+        this.socket.send("width");
+    }
+    
+    RequestHeight() {
+        this.socket.send("height");
     }
 }
 
-function RequestElevationData() {
-    socket.send("elevationData");
+const socket = new Socket("localhost", 5963, "default");
+
+socket.AddConsumer(LogToConsole);
+
+function LogToConsole(data) {
+    console.log(data);
 }
-
-function RequestWidth() {
-    socket.send("width");
-}
-
-function RequestHeight() {
-    socket.send("height");
-}
-
-
 
 
