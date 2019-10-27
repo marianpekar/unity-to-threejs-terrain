@@ -14,13 +14,20 @@
         for (int i = 0; i < array2d.GetLength(0); i += density)
             for(int j = 0; j < array2d.GetLength(1); j += density)
             {
-                if(i != j)
-                    result += string.Format("\"{0}\",", array2d[j, i]);
-
 #if UNITY_EDITOR
                 progressBar.Progress++;
                 progressBar.Update();
 #endif
+
+                if(density == 1)
+                {
+                    result += string.Format("\"{0}\",", array2d[j, i]);
+                    continue;
+                }
+
+                if (i != j)
+                    result += string.Format("\"{0}\",", array2d[j, i]);
+
             }
 
 
