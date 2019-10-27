@@ -9,7 +9,7 @@ public class EditorUtilityDisplayProgressBar
     public void Update()
     {
         if(Progress < Total)
-            EditorUtility.DisplayProgressBar(Title, Description, Progress / Total);
+            EditorUtility.DisplayProgressBar(Title, string.Format("{0} ({1}/{2})", Description, Progress, Total), Progress / Total);
         else
         {
             Reset();
