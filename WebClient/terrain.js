@@ -79,6 +79,7 @@ function Start() {
 
     // objects
     let scene = new THREE.Scene();
+    scene.background = new THREE.Color( 0x29434e );
     let camera = new THREE.PerspectiveCamera( CAMERA_FOV, window.innerWidth/window.innerHeight, CAMERA_NEAR_PLANE, CAMERA_FAR_PLANE );
     let renderer = new THREE.WebGLRenderer();
 
@@ -104,7 +105,7 @@ function Start() {
         geometry.vertices[i].z = terrainData.elevationData[i] * DEPTH;
       }
 
-    let material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
+    let material = new THREE.MeshBasicMaterial( { color: 0x00e676, wireframe: true } );
     let plane = new THREE.Mesh( geometry, material );
     plane.rotation.x = -Math.PI / 2;
     scene.add( plane );
