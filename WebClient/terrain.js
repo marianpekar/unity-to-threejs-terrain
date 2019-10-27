@@ -52,6 +52,8 @@ class TerrainData {
     
                     socket.RequestHeight((data) => {
                         this.height = data;
+
+                        Start();
                     })
                 })
             })
@@ -61,4 +63,57 @@ class TerrainData {
 
 terrainData = new TerrainData();
 terrainData.Load();
+
+function Start() {
+    const DEPTH = 2500;
+    const PLANE_WIDTH = 512;
+    const PLANE_HEIGHT = 512;
+    const ROTATION_SPEED = 0.001;
+
+    const CAMERA_FOV = 75;
+    const CAMERA_NEAR_PLANE = 0.1;
+    const CAMERA_FAR_PLANE = 2000;
+
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera( CAMERA_FOV, window.innerWidth/window.innerHeight, CAMERA_NEAR_PLANE, CAMERA_FAR_PLANE );
+
+    window.addEventListener( 'resize', onWindowResize, false );
+
+    function onWindowResize(){
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+
+    let renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    let geometry = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT, terrainData.width - 1, terrainData.height - 1);
+
+    for (let i = 0, l = geometry.vertices.length; i < l; i++) {
+        geometry.vertices[i].z = terrainData.elevationData[i] * DEPTH;
+      }
+
+    let material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
+    let plane = new THREE.Mesh( geometry, material );
+    plane.rotation.x = Math.PI / 2;
+    scene.add( plane );
+
+    camera.position.z = 630;
+    camera.position.y = 128;
+    camera.lookAt(plane.position);
+
+    let animate = function () {
+        requestAnimationFrame( animate );
+
+        plane.rotation.z += ROTATION_SPEED;
+
+        renderer.render( scene, camera );
+    };
+
+    animate();
+}
+
 
