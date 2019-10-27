@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea131d1775617ac47867607b59cbfaf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataCompression: 3
+  dataCompression: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,8 +350,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -391,8 +391,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.30195805, y: 0.17597975, z: -0.05682, w: 0.9352133}
-  m_LocalPosition: {x: 148.09723, y: 527.6494, z: -363.94626}
+  m_LocalRotation: {x: -0.11131082, y: 0.48237264, z: -0.062095445, w: -0.8666434}
+  m_LocalPosition: {x: 1883.2898, y: 531.58514, z: -257.2799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
