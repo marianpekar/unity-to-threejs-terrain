@@ -14,6 +14,10 @@
         for (int i = 0; i < array2d.GetLength(0); i += density)
             for(int j = 0; j < array2d.GetLength(1); j += density)
             {
+                // To avoid strange diagonal line on the reconstructed terrain
+                if (i == j)
+                    continue;
+
                 result += string.Format("\"{0}\",", array2d[j, i]);
 
 #if UNITY_EDITOR
