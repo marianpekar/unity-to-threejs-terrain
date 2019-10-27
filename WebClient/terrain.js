@@ -65,18 +65,26 @@ terrainData = new TerrainData();
 terrainData.Load();
 
 function Start() {
-    const DEPTH = 2500;
-    const PLANE_WIDTH = 512;
-    const PLANE_HEIGHT = 512;
+    // options
+    const DEPTH = 600;
+    const PLANE_WIDTH = 1024;
+    const PLANE_HEIGHT = 1024;
+
+    const ROTATE = false;
     const ROTATION_SPEED = 0.001;
 
     const CAMERA_FOV = 75;
     const CAMERA_NEAR_PLANE = 0.1;
     const CAMERA_FAR_PLANE = 2000;
 
+    // objects
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera( CAMERA_FOV, window.innerWidth/window.innerHeight, CAMERA_NEAR_PLANE, CAMERA_FAR_PLANE );
+    let renderer = new THREE.WebGLRenderer();
 
+    new THREE.OrbitControls( camera, renderer.domElement );
+
+    // event listeners
     window.addEventListener( 'resize', onWindowResize, false );
 
     function onWindowResize(){
@@ -86,10 +94,10 @@ function Start() {
         renderer.setSize( window.innerWidth, window.innerHeight );
     }
 
-    let renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
 
+    // construct and add terrain
     let geometry = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT, terrainData.width - 1, terrainData.height - 1);
 
     for (let i = 0, l = geometry.vertices.length; i < l; i++) {
@@ -98,22 +106,24 @@ function Start() {
 
     let material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
     let plane = new THREE.Mesh( geometry, material );
-    plane.rotation.x = Math.PI / 2;
+    plane.rotation.x = -Math.PI / 2;
     scene.add( plane );
 
-    camera.position.z = 630;
-    camera.position.y = 128;
+    // position camera
+    camera.position.z = PLANE_WIDTH * 0.9;
+    camera.position.y = PLANE_WIDTH * 0.2;
     camera.lookAt(plane.position);
 
+    // render loop
     let animate = function () {
         requestAnimationFrame( animate );
 
-        plane.rotation.z += ROTATION_SPEED;
+        if(ROTATE)
+            plane.rotation.z += ROTATION_SPEED;
 
         renderer.render( scene, camera );
     };
 
     animate();
 }
-
 
