@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 200857063}
   - component: {fileID: 200857062}
   - component: {fileID: 200857061}
+  - component: {fileID: 200857065}
+  - component: {fileID: 200857064}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -195,65 +197,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &341882446
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 341882447}
-  - component: {fileID: 341882448}
-  - component: {fileID: 341882449}
-  m_Layer: 0
-  m_Name: TerrainDataProvider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &341882447
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341882446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &341882448
+--- !u!114 &200857064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341882446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea131d1775617ac47867607b59cbfaf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrainData: {fileID: 15600000, guid: 43b227d2e9767ef4fb32510f38b406fc, type: 2}
-  quality: 0.1
---- !u!114 &341882449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341882446}
+  m_GameObject: {fileID: 200857060}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6546926120d91e47aa658b6a5144077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wsServerPort: 5963
+  servicePath: /default
+--- !u!114 &200857065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200857060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea131d1775617ac47867607b59cbfaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quality: 0.1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
