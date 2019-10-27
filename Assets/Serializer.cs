@@ -14,7 +14,8 @@
         for (int i = 0; i < array2d.GetLength(0); i += density)
             for(int j = 0; j < array2d.GetLength(1); j += density)
             {
-                result += string.Format("\"{0}\",", array2d[j, i]);
+                if(i != j)
+                    result += string.Format("\"{0}\",", array2d[j, i]);
 
 #if UNITY_EDITOR
                 progressBar.Progress++;
